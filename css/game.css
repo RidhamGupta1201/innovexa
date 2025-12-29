@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard | ConnectX</title>
+  <link rel="stylesheet" href="css/game.css" />
+</head>
+<body>
+
+  <div class="dashboard">
+
+    <!-- PROFILE CARD -->
+    <div class="profile-card">
+      <img id="avatar" />
+      <h2 id="username">Player</h2>
+      <p id="level">Level 1</p>
+
+      <div class="xp-bar">
+        <div id="xpFill"></div>
+      </div>
+      <p><span id="xp">0</span> XP</p>
+    </div>
+
+    <!-- ACTION ZONE -->
+    <div class="actions">
+
+      <div class="card">
+        <h3>🎯 Add Strength</h3>
+        <input id="strengthInput" placeholder="e.g. Mathematics" />
+        <button id="addStrength">+ Add</button>
+        <div id="strengths" class="tag-container"></div>
+      </div>
+
+      <div class="card">
+        <h3>🧩 Add Need</h3>
+        <input id="needInput" placeholder="e.g. DSA Help" />
+        <button id="addNeed">+ Add</button>
+        <div id="needs" class="tag-container"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>
