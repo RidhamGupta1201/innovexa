@@ -16,12 +16,31 @@ body {
 
 /* HERO */
 .hero {
+  padding-top: 120px;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 60px;
+
+  z-index: 9999; /* 🔥 THIS IS CRITICAL */
+
+  background: rgba(2, 6, 23, 0.7);
+  backdrop-filter: blur(12px);
 }
 
 .team-name {
@@ -124,4 +143,68 @@ body {
 @keyframes bounce {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(10px); }
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.get-started-btn {
+  text-decoration: none;
+  font-weight: 600;
+
+  padding: 10px 22px;
+  border-radius: 999px;
+
+  background: linear-gradient(90deg, #22c55e, #3b82f6);
+  color: black !important;
+
+  box-shadow: 0 0 15px rgba(59,130,246,0.6);
+}
+
+
+.get-started-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(59,130,246,0.6);
+}
+.about-text {
+  max-width: 700px;
+  margin: 0 auto 40px;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  opacity: 0.85;
+}
+
+.team-heading {
+  margin-top: 40px;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+.team-list {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.team-member {
+  padding: 12px 22px;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
 }
