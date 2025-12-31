@@ -4,7 +4,8 @@ const title = document.getElementById("hero-title");
 window.addEventListener("scroll", () => {
   const scrollY = window.scrollY;
   const scale = 1 + Math.min(scrollY / 800, 0.4);
-  title.style.transform = `scale(${scale})`;
+
+  title.style.transform = `translateY(${scrollY * 0.35}px) scale(${scale})`;
 });
 
 /* ===== 2. MOUSE TRACE COLOR EFFECT ===== */
@@ -46,6 +47,8 @@ function revealOnScroll() {
 
     if (top < windowHeight - 150) {
       section.classList.add("active");
+    } else {
+      section.classList.remove("active");
     }
   });
 }
@@ -53,3 +56,29 @@ function revealOnScroll() {
 window.addEventListener("scroll", revealOnScroll);
 revealOnScroll();
 
+/* =======================
+   PARALLAX SCROLL EFFECT
+======================= */
+const parallaxElements = document.querySelectorAll("[data-speed]");
+
+function handleParallax() {
+  const viewportHeight = window.innerHeight;
+
+  parallaxElements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    const speed = parseFloat(el.dataset.speed);
+
+    // Only apply when element is visible
+    if (rect.top < viewportHeight && rect.bottom > 0) {
+      const progress =
+        (viewportHeight - rect.top) / (viewportHeight + rect.height);
+
+      const translateY = (progress - 0.5) * speed * 100;
+
+      el.style.transform = `translateY(${translateY}px)`;
+    }
+  });
+}
+
+window.addEventListener("scroll", handleParallax);
+handleParallax();

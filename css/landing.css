@@ -51,7 +51,9 @@ body::before {
     transform: translateY(-1000px);
   }
 }
-
+body::before {
+  transform: translateY(var(--star-offset, 0));
+}
 /* =======================
    NAVBAR
 ======================= */
