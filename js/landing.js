@@ -59,22 +59,20 @@ revealOnScroll();
 /* =======================
    PARALLAX SCROLL EFFECT
 ======================= */
-const parallaxElements = document.querySelectorAll("[data-speed]");
+const parallaxItems = document.querySelectorAll(".parallax-inner");
 
 function handleParallax() {
   const viewportHeight = window.innerHeight;
 
-  parallaxElements.forEach(el => {
+  parallaxItems.forEach(el => {
     const rect = el.getBoundingClientRect();
     const speed = parseFloat(el.dataset.speed);
 
-    // Only apply when element is visible
     if (rect.top < viewportHeight && rect.bottom > 0) {
       const progress =
         (viewportHeight - rect.top) / (viewportHeight + rect.height);
 
       const translateY = (progress - 0.5) * speed * 100;
-
       el.style.transform = `translateY(${translateY}px)`;
     }
   });
