@@ -2,11 +2,218 @@
 <html>
 <head>
   <title>Login</title>
+  <style>
+    *{
+      margin :0;
+      padding :0;
+      box-sizing: border-box;
+    }
+    html,body{
+      height :100%;
+      width :100%;
+      background-color: whitesmoke;
+
+    }
+    .header{
+       width : 50%;
+       padding : 15px 15px ;
+       display : flex;
+       gap :4px;
+    }
+    .header img {
+      height : 20px;
+      width: 20px;
+      border-radius: 10px;
+    }
+    h3{
+      font-family:monospace ;
+      font-style: italic;
+    }
+    #body{
+      width : 100%;
+      height : 100%;
+      display : flex;
+    }
+    .left {
+  flex: 1; 
+  padding: 20px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.right {
+  flex: 1; 
+  position: relative;
+  margin-top: -50px;
+  margin-bottom : 10px;
+  overflow-x :hidden; 
+}
+.right img {
+  width: 100%;
+  height: 93%;
+  object-fit: cover; 
+  padding: 10px 10px 0 10px;
+  box-sizing: border-box;
+}
+.left {
+ display : flex;
+ justify-content :center;
+ align-items: center;
+}
+.login {
+  width : 400px;
+  margin-top: -90px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+ }
+.login h1 {
+    font-family: fantasy;
+    font-size: 50px;
+}
+ #note{
+   margin-top: 5px;
+   display : flex;
+   justify-content: center;
+   font-size: 16px;
+   color:grey;
+ }
+#email{
+  margin-top: 30px;
+}
+#email input{
+   margin-top: 8px;
+   width : 100%;
+   height: 35px;
+   padding : 0px 10px;
+   border: 2px solid rgb(169, 164, 164);
+}
+#password{
+  padding: 25px 0px;
+}
+#password input{
+   margin-top: 8px;
+   width : 100%;
+   height: 35px;
+   padding : 0px 10px;
+   border: 2px solid rgb(169, 164, 164);
+}
+#option{
+  display : flex;
+  justify-content: space-between;
+}
+#submit{
+  margin-top: 8px;
+   width : 100%;
+   height: 35px;
+   padding : 0px 10px;
+   border: 2px solid rgb(169, 164, 164);
+   font-family: Arial, Helvetica, sans-serif;
+   color:white;
+   background-color: black;
+}
+#googleLogin{
+  margin-top: 20px;
+  width : 100%;
+   height: 35px;
+   padding : 0px 10px;
+   border: 2px solid rgb(169, 164, 164);
+   font-family: Arial, Helvetica, sans-serif;
+   background-color: #E3E3E3;
+}
+#googleLogin img{
+  border-radius: 7px;
+  margin-bottom: -5px;
+}
+#closing{
+  padding:20px 0px;
+  display:flex;
+  justify-content: center;
+
+}
+@media(max-width:800px){
+  #body {
+    padding: 120px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+  }
+  .right img{
+    display : none;
+ }
+ .left {
+  width:100%;
+ display : flex;
+ justify-content :center;
+ align-items: center;
+ padding: 20px;   
+}
+.login {
+  width: 400px;
+    max-width: 90%; 
+}
+}
+@media(max-width : 490px){
+  .login h1{
+    font-size: 40px;
+     display : flex;
+   justify-content: center;
+ 
+  }
+
+}
+@media(max-width : 400px){
+  .login h1{
+    font-size: 27px;
+     display : flex;
+   justify-content: center;
+
+  }
+}
+ </style>
 </head>
 <body>
-
-  <h2>Sign in to Continue</h2>
-  <button id="googleLogin">Continue with Google</button>
+    <div class = header>
+   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZjPQz1dcLf6_hIaTUYB7T8ooueoneymMzA-NllNr8_w&s" alt="">
+    <h3>CampusConnect</h3>
+    </div>
+  <div id = "body">
+   <div class="left">
+  <div class="login">
+   <h1>Ready To Connect?</h1>
+   <h4 id = "note">please enter your details </h2>
+   <form>
+    <div id = "email">
+    <h4>Email address</h4>
+     <input type="email" placeholder="enter your email">
+     </div>
+     <div id = "password">
+      <h4>Password</h4>
+      <input type = "password" placeholder = "enter your password">
+     </div>
+     <div id="option">
+       <div id="remember">
+      <label>
+       <input type="checkbox" name="remember" value="30days">
+      Remember for 30 days
+      </label>
+      </div>
+      <a href = "">forgot password</a>
+     </div>
+     <input id ="submit" type = "submit" value ="Sign in">
+     <br>
+    <button id="googleLogin"><img src="data:image/jpeg;base64,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" alt="" width="20" height="20"> Sign in with Google</button>
+     <div id = "closing">
+      <h4>Don't have an account?</h4>
+      <a id ="signup" href = "">Sign up</a>
+     </div>
+   </form>
+   </div>
+   </div>
+   <div class = "right">
+    <img src="https://thumbs.dreamstime.com/b/network-data-connections-overlay-black-network-data-connections-overlay-black-background-networking-191588363.jpg" alt="connecting..">
+   </div>
+   </div>
 
   <script type="module" src="js/auth.js"></script>
 </body>
