@@ -1,10 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
   <meta charset="UTF-8" />
   <title>Campus Connect | Login</title>
 
   <link rel="stylesheet" href="css/login.css" />
+=======
+  <title>Login</title>
+  <style>
+    *{
+      margin :0;
+      padding :0;
+      box-sizing: border-box;
+    }
+    html,body{
+      height :100%;
+      width :100%;
+      background-color: black;
+      color:white;
+
+    }
+    .header{
+       width : 50%;
+       padding : 15px 15px ;
+       display : flex;
+       gap :4px;
+    }
+    .header img {
+      height : 20px;
+      width: 20px;
+      border-radius: 10px;
+    }
+    h3{
+
+      font-family:monospace ;
+      font-style: italic;
+    }
+    #body{
+      width : 100%;
+      height : 100%;
+      display : flex;
+    }
+    .left {
+  flex: 1; 
+  padding: 20px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.right {
+  flex: 1; 
+  position: relative;
+  margin-top: -50px;
+  margin-bottom : 10px;
+  overflow-x :hidden; 
+}
+.right img {
+  width: 100%;
+  height: 93%;
+  object-fit: cover; 
+  padding: 10px 10px 0 10px;
+  box-sizing: border-box;
+}
+.left {
+ display : flex;
+ justify-content :center;
+ align-items: center;
+}
+.login {
+  width : 400px;
+  margin-top: -90px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+ }
+.login h1 {
+    font-family: fantasy;
+    font-size: 50px;
+    color: #e3e3e39c;
+}
+ #note{
+   margin-top: 5px;
+   display : flex;
+   justify-content: center;
+   font-size: 16px;
+   color:grey;
+ }
+#email{
+  margin-top: 30px;
+}
+#email input{
+   margin-top: 8px;
+   width : 100%;
+   height: 35px;
+   padding : 0px 10px;
+   border: 3px solid rgb(64, 60, 66);
+    background-color: #E3E3E3;
+}
+#password{
+  padding: 25px 0px;
+}
+#password input{
+   margin-top: 8px;
+   width : 100%;
+   height: 35px;
+   padding : 0px 10px;
+   border: 3px solid rgb(64, 60, 66);
+    background-color: #E3E3E3;
+}
+#option{
+  display : flex;
+  justify-content: space-between;
+}
+#submit{
+  margin-top: 8px;
+   width : 100%;
+   height: 35px;
+   padding : 0px 10px;
+   border: 2px solid rgb(169, 164, 164);
+   font-family: Arial, Helvetica, sans-serif;
+   color:white;
+   background-color: black;
+}
+#googleLogin{
+  margin-top: 20px;
+  width : 100%;
+   height: 35px;
+   padding : 0px 10px;
+   border:3px solid rgb(64, 60, 66);
+   font-family: Arial, Helvetica, sans-serif;
+   background-color: #E3E3E3;
+}
+#googleLogin img{
+  border-radius: 7px;
+  margin-bottom: -5px;
+}
+#closing{
+  padding:20px 0px;
+  display:flex;
+  justify-content: center;
+
+}
+@media(max-width:1024px){
+  #body {
+    padding: 120px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+  }
+  .right img{
+    display : none;
+ }
+ .left {
+  width:100%;
+ display : flex;
+ justify-content :center;
+ align-items: center;
+ padding: 20px;   
+}
+.login {
+  width: 400px;
+    max-width: 90%; 
+}
+}
+@media(max-width : 490px){
+  .login h1{
+    font-size: 40px;
+     display : flex;
+   justify-content: center;
+ 
+  }
+
+}
+@media(max-width : 400px){
+  .login h1{
+    font-size: 27px;
+     display : flex;
+   justify-content: center;
+
+  }
+}
+ </style>
+>>>>>>> 1b196e8d93b79bcbd71fb2f9f7ff62251ea27e4d
 </head>
 <body>
 
