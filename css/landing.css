@@ -117,10 +117,9 @@ body::before {
 }
 
 #hero-title {
-  font-size: 6rem;
+  font-size: 9rem;
   font-weight: 900;
   letter-spacing: 8px;
-  text-transform: uppercase;
 
   color: #e5e7eb;
   text-shadow:
@@ -207,7 +206,7 @@ body::before {
 }
 
 /* =======================
-   CARDS (HOW IT WORKS)
+   CARDS
 ======================= */
 .cards {
   margin-top: 45px;
@@ -237,7 +236,7 @@ body::before {
 
 
 /* =======================
-   ABOUT US
+ABOUT US
 ======================= */
 .about {
   padding: 140px 15%;
@@ -287,7 +286,7 @@ body::before {
 }
 
 /* =======================
-   SCROLL REVEAL
+SCROLL REVEAL
 ======================= */
 .reveal {
   opacity: 0;
@@ -301,7 +300,7 @@ body::before {
 }
 
 /* =======================
-   RESPONSIVE
+RESPONSIVE
 ======================= */
 @media (max-width: 900px) {
   .navbar {
@@ -326,7 +325,7 @@ body::before {
   }
 
   .nav-links {
-    display: none; /* can add hamburger later */
+    display: none;
   }
 }
 #about {

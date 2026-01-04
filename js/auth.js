@@ -1,36 +1,30 @@
-import { auth, db } from "./firebase.js";
-import { GoogleAuthProvider, signInWithPopup } from 
-  "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, setDoc, getDoc } from 
-  "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  GoogleAuthProvider,
+  signInWithPopup
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+// ✅ IMPORT FROM YOUR firebase.js (MATCHING EXPORTS)
+import { auth } from "./firebase.js";
+
+console.log("auth.js loaded");
 
 const provider = new GoogleAuthProvider();
+const googleBtn = document.getElementById("googleLogin");
 
-document.getElementById("googleLogin").addEventListener("click", async () => {
+if (!googleBtn) {
+  console.error("Google login button not found");
+}
+
+googleBtn.addEventListener("click", async () => {
+  console.log("Google button clicked");
+
   try {
     const result = await signInWithPopup(auth, provider);
-    const user = result.user;
+    console.log("Login successful:", result.user.email);
 
-    const userRef = doc(db, "users", user.uid);
-    const userSnap = await getDoc(userRef);
-
-    if (!userSnap.exists()) {
-      await setDoc(userRef, {
-        uid: user.uid,
-        name: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL,
-        strengths: [],
-        needs: [],
-        committees: [],
-        createdAt: new Date()
-      });
-    }
-
+    // ✅ Redirect after login
     window.location.href = "dashboard.html";
-
   } catch (error) {
-    console.error(error);
-    alert("Login failed");
+    console.error("Google login error:", error);
   }
 });
