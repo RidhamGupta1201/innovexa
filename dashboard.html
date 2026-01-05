@@ -2,46 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Dashboard | ConnectX</title>
-  <link rel="stylesheet" href="css/game.css" />
+  <title>Campus Connect | Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css" />
 </head>
 <body>
 
-  <div class="dashboard">
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">CampusConnect</div>
+    <div class="nav-right">
+      <span class="level">Level 1</span>
+      <img id="profilePicNav" src="https://i.pravatar.cc/40" alt="Profile" />
+    </div>
+  </nav>
 
-    <!-- PROFILE CARD -->
-    <div class="profile-card">
-      <img id="avatar" />
-      <h2 id="username">Player</h2>
-      <p id="level">Level 1</p>
+  <!-- MAIN -->
+  <main class="container">
 
-      <div class="xp-bar">
-        <div id="xpFill"></div>
+    <div class="card profile-card">
+      <h2>👤 Your Profile</h2>
+
+      <!-- PHOTO -->
+      <div class="photo-section">
+        <img id="profilePreview" src="https://i.pravatar.cc/120" />
+        <label class="upload-btn">
+          Upload Photo
+          <input type="file" id="photoInput" hidden />
+        </label>
       </div>
-      <p><span id="xp">0</span> XP</p>
+
+      <!-- FORM -->
+      <div class="form">
+
+        <div class="field">
+          <label>Name</label>
+          <input type="text" placeholder="Your full name" />
+        </div>
+
+        <div class="field">
+          <label>College</label>
+          <input type="text" placeholder="Your college name" />
+        </div>
+
+        <div class="field">
+          <label>Strengths</label>
+          <input type="text" placeholder="e.g. DSA, UI/UX, Mathematics" />
+        </div>
+
+        <div class="field">
+          <label>Needs</label>
+          <input type="text" placeholder="e.g. Web Dev Help, ML Basics" />
+        </div>
+
+        <button class="save-btn">Save Profile</button>
+
+      </div>
     </div>
 
-    <!-- ACTION ZONE -->
-    <div class="actions">
+  </main>
 
-      <div class="card">
-        <h3>🎯 Add Strength</h3>
-        <input id="strengthInput" placeholder="e.g. Mathematics" />
-        <button id="addStrength">+ Add</button>
-        <div id="strengths" class="tag-container"></div>
-      </div>
-
-      <div class="card">
-        <h3>🧩 Add Need</h3>
-        <input id="needInput" placeholder="e.g. DSA Help" />
-        <button id="addNeed">+ Add</button>
-        <div id="needs" class="tag-container"></div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <script type="module" src="js/dashboard.js"></script>
+  <script src="js/dashboard.js"></script>
 </body>
 </html>
