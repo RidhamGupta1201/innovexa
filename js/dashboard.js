@@ -1,75 +1,59 @@
+import {
+  GoogleAuthProvider,
+  signInWithPopup
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import {
+  doc,
+  getDoc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// ✅ Import shared Firebase instances
 import { auth, db } from "./firebase.js";
-import { onAuthStateChanged } from
-  "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, getDoc, updateDoc, arrayUnion } from
-  "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const username = document.getElementById("username");
-const avatar = document.getElementById("avatar");
-const xpText = document.getElementById("xp");
-const xpFill = document.getElementById("xpFill");
-const levelText = document.getElementById("level");
+console.log("auth.js loaded");
 
-let xp = 0;
-let level = 1;
-let userRef;
+const provider = new GoogleAuthProvider();
+const googleBtn = document.getElementById("googleLogin");
 
-function updateXPUI() {
-  xpText.innerText = xp;
-  xpFill.style.width = `${(xp % 100)}%`;
-  levelText.innerText = `Level ${Math.floor(xp / 100) + 1}`;
+if (!googleBtn) {
+  console.error("Google login button not found");
 }
 
-function createTag(container, text) {
-  const span = document.createElement("span");
-  span.className = "tag";
-  span.innerText = text;
-  container.appendChild(span);
-}
+googleBtn.addEventListener("click", async () => {
+  console.log("Google button clicked");
 
-onAuthStateChanged(auth, async (user) => {
-  if (!user) return;
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
 
-  username.innerText = user.displayName;
-  avatar.src = user.photoURL;
+    console.log("Login successful:", user.email);
 
-  userRef = doc(db, "users", user.uid);
-  const snap = await getDoc(userRef);
+    // 🔥 CREATE USER IN FIRESTORE (IF NOT EXISTS)
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
 
-  if (snap.exists()) {
-    const data = snap.data();
-    xp = data.xp || 0;
-    updateXPUI();
+    if (!userSnap.exists()) {
+      await setDoc(userRef, {
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        createdAt: serverTimestamp(),
+        strengths: [],
+        weaknesses: []
+      });
 
-    (data.strengths || []).forEach(s =>
-      createTag(document.getElementById("strengths"), s)
-    );
+      console.log("New user added to Firestore");
+    } else {
+      console.log("User already exists in Firestore");
+    }
 
-    (data.needs || []).forEach(n =>
-      createTag(document.getElementById("needs"), n)
-    );
+    // ✅ Redirect after DB write
+    window.location.href = "dashboard.html";
+
+  } catch (error) {
+    console.error("Google login error:", error);
   }
 });
-
-document.getElementById("addStrength").onclick = async () => {
-  const val = strengthInput.value.trim();
-  if (!val) return;
-
-  xp += 20;
-  updateXPUI();
-
-  await updateDoc(userRef, {
-    strengths: arrayUnion(val),
-    xp: xp
-  });
-
-  createTag(strengths, val);
-  strengthInput.value = "";
-};
-
-document.getElementById("addNeed").onclick = async () => {
-  const val = needInput.value.trim();
-  if (!val) return;
-
-  xp += 10;
-  updateXPUI();
