@@ -150,3 +150,89 @@ body {
     transform: translateY(0);
   }
 }
+/* TAG SYSTEM */
+.tag-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tag-input {
+  display: flex;
+  gap: 10px;
+}
+
+.tag-input input {
+  flex: 1;
+}
+
+.add-btn {
+  width: 42px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  color: black;
+}
+
+.add-btn:hover {
+  transform: scale(1.1);
+}
+
+.tag-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  background: rgba(59, 130, 246, 0.25);
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  backdrop-filter: blur(6px);
+}
+/* Make tag inputs look like normal inputs */
+.field-input {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.field-input input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 10px 12px;
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.field-input input::placeholder {
+  opacity: 0.5;
+}
+
+/* Plus button refinement */
+.add-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-btn:hover {
+  transform: scale(1.1);
+}

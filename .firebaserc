@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "connectx-test-ddf36"
-  }
+    "default": "campusconnect-18208",
+    "campusconnect": "campusconnect-18208"
+  },
+  "targets": {},
+  "etags": {}
 }

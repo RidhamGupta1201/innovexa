@@ -36,31 +36,56 @@
 
         <div class="field">
           <label>Name</label>
-          <input type="text" placeholder="Your full name" />
+          <input id="nameInput" type="text" placeholder="Your full name" />
         </div>
 
         <div class="field">
           <label>College</label>
-          <input type="text" placeholder="Your college name" />
+          <input id="collegeInput" type="text" placeholder="Your college name" />
         </div>
 
         <div class="field">
+          <label>Age</label>
+          <input id="ageInput" type="number" placeholder="Your age" />
+        </div>
+
+        <!-- STRENGTHS -->
+        <div class="tag-section">
           <label>Strengths</label>
-          <input type="text" placeholder="e.g. DSA, UI/UX, Mathematics" />
+          <div class="tag-input field-input">
+            <input id="strengthInput" type="text" placeholder="e.g. DSA" />
+            <button class="add-btn" onclick="addTag('strength')">＋</button>
+          </div>
+          <div id="strengthList" class="tag-list"></div>
         </div>
 
-        <div class="field">
-          <label>Needs</label>
-          <input type="text" placeholder="e.g. Web Dev Help, ML Basics" />
+        <!-- HOBBIES -->
+        <div class="tag-section">
+          <label>Hobbies</label>
+          <div class="tag-input field-input">
+            <input id="hobbyInput" type="text" placeholder="e.g. Chess" />
+            <button class="add-btn" onclick="addTag('hobby')">＋</button>
+          </div>
+          <div id="hobbyList" class="tag-list"></div>
         </div>
 
-        <button class="save-btn">Save Profile</button>
+        <!-- WEAKNESS -->
+        <div class="tag-section">
+          <label>Weakness</label>
+          <div class="tag-input field-input">
+            <input id="weaknessInput" type="text" placeholder="e.g. Web Dev" />
+            <button class="add-btn" onclick="addTag('weakness')">＋</button>
+          </div>
+          <div id="weaknessList" class="tag-list"></div>
+        </div>
+
+        <button class="save-btn" id="saveProfile">Save Profile</button>
 
       </div>
     </div>
 
   </main>
 
-  <script src="js/dashboard.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
 </body>
 </html>
