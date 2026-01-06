@@ -1,8 +1,5 @@
 {
   "projects": {
-    "default": "campusconnect-18208",
-    "campusconnect": "campusconnect-18208"
-  },
-  "targets": {},
-  "etags": {}
+    "default": "campusconnect-18208"
+  }
 }

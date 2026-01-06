@@ -9,35 +9,43 @@ let strengths = [];
 let hobbies = [];
 let weaknesses = [];
 
+// ADD CHIP
 window.addTag = function (type) {
-  let input, list, array;
+  let input, list, arr;
 
   if (type === "strength") {
     input = document.getElementById("strengthInput");
     list = document.getElementById("strengthList");
-    array = strengths;
+    arr = strengths;
   }
+
   if (type === "hobby") {
     input = document.getElementById("hobbyInput");
     list = document.getElementById("hobbyList");
-    array = hobbies;
+    arr = hobbies;
   }
+
   if (type === "weakness") {
     input = document.getElementById("weaknessInput");
     list = document.getElementById("weaknessList");
-    array = weaknesses;
+    arr = weaknesses;
   }
 
   const value = input.value.trim();
-  if (!value) return;
+  if (!value || arr.includes(value)) return;
 
-  array.push(value);
+  arr.push(value);
 
   const chip = document.createElement("div");
   chip.className = "tag";
   chip.innerText = value;
-  list.appendChild(chip);
 
+  chip.onclick = () => {
+    arr.splice(arr.indexOf(value), 1);
+    chip.remove();
+  };
+
+  list.appendChild(chip);
   input.value = "";
 };
 
@@ -46,22 +54,25 @@ document.getElementById("saveProfile").addEventListener("click", async () => {
   const user = auth.currentUser;
 
   if (!user) {
-    alert("User not logged in");
+    alert("Not logged in");
     return;
   }
 
-  const userRef = doc(db, "users", user.uid);
+  try {
+    await updateDoc(doc(db, "users", user.uid), {
+      name: document.getElementById("nameInput").value,
+      college: document.getElementById("collegeInput").value,
+      age: Number(document.getElementById("ageInput").value),
+      strengths,
+      hobbies,
+      weaknesses,
+      profileCompleted: true,
+      updatedAt: serverTimestamp()
+    });
 
-  await updateDoc(userRef, {
-    name: document.getElementById("nameInput").value,
-    college: document.getElementById("collegeInput").value,
-    age: Number(document.getElementById("ageInput").value),
-    strengths,
-    hobbies,
-    weaknesses,
-    profileCompleted: true,
-    updatedAt: serverTimestamp()
-  });
-
-window.location.href = "profile.html";
+    window.location.href = "profile.html";
+  } catch (err) {
+    alert("Error saving profile");
+    console.error(err);
+  }
 });
