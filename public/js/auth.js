@@ -12,24 +12,25 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const provider = new GoogleAuthProvider();
+document.addEventListener("DOMContentLoaded", () => {
+  const provider = new GoogleAuthProvider();
+  const googleBtn = document.getElementById("googleLogin");
 
-const googleBtn = document.getElementById("googleLogin");
+  if (!googleBtn) return;
 
-if (googleBtn) {
   googleBtn.addEventListener("click", async (e) => {
-    e.preventDefault(); // 🔴 VERY IMPORTANT (prevents form reload)
+    e.preventDefault();
 
     try {
-      // 1️⃣ Google Login
+      // 1️⃣ Google Sign‑In
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      // 2️⃣ Reference to Firestore user doc
+      // 2️⃣ Firestore reference
       const userRef = doc(db, "users", user.uid);
       const userSnap = await getDoc(userRef);
 
-      // 3️⃣ FIRST TIME USER → CREATE PROFILE
+      // 3️⃣ First‑time user
       if (!userSnap.exists()) {
         await setDoc(userRef, {
           uid: user.uid,
@@ -46,19 +47,16 @@ if (googleBtn) {
           updatedAt: serverTimestamp()
         });
 
-        // 👉 First-time user must fill profile
         window.location.href = "dashboard.html";
         return;
       }
 
-      // 4️⃣ EXISTING USER → CHECK PROFILE STATUS
+      // 4️⃣ Existing user
       const data = userSnap.data();
 
       if (data.profileCompleted) {
-        // ✅ Profile already filled
         window.location.href = "profile.html";
       } else {
-        // 📝 Profile incomplete
         window.location.href = "dashboard.html";
       }
 
@@ -67,4 +65,4 @@ if (googleBtn) {
       alert("Google login failed. Please try again.");
     }
   });
-}
+});
