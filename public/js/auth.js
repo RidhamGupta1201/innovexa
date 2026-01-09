@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = userSnap.data();
 
       if (data.profileCompleted) {
-        window.location.href = "profile.html";
+        window.location.href = "features.html";
       } else {
         window.location.href = "dashboard.html";
       }

@@ -70,7 +70,7 @@ document.getElementById("saveProfile").addEventListener("click", async () => {
       updatedAt: serverTimestamp()
     });
 
-    window.location.href = "profile.html";
+    window.location.href = "features.html";
   } catch (err) {
     alert("Error saving profile");
     console.error(err);

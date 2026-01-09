@@ -13,3 +13,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Gemini API Key
+backend/.env
