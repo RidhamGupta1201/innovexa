@@ -6,99 +6,51 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.use(cors({ origin: "*" }));
+app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 /* =========================
-   TEST ROUTE
+   HEALTH CHECK
 ========================= */
 app.get("/", (req, res) => {
-  res.send("Backend is running");
+  res.send("✅ Gemini backend running");
 });
 
 /* =========================
-   HELPER: NORMALIZE ARRAYS
-========================= */
-function normalize(arr = []) {
-  return Array.isArray(arr)
-    ? arr.map(v => v.toLowerCase().trim())
-    : [];
-}
-
-/* =========================
-   GEMINI PEER MATCHING
+   PEER MATCHING API
 ========================= */
 app.post("/api/match-peers", async (req, res) => {
   try {
-    let { currentUser, otherUsers, userQuery } = req.body;
+    const { currentUser, otherUsers, userQuery } = req.body;
 
     if (!currentUser || !Array.isArray(otherUsers)) {
       return res.json([]);
     }
 
-    /* 🔧 NORMALIZE USER DATA */
-    currentUser = {
-      ...currentUser,
-      strengths: normalize(currentUser.strengths),
-      weaknesses: normalize(currentUser.weaknesses),
-      hobbies: normalize(currentUser.hobbies)
-    };
-
-    otherUsers = otherUsers.map(u => ({
-      ...u,
-      strengths: normalize(u.strengths),
-      weaknesses: normalize(u.weaknesses),
-      hobbies: normalize(u.hobbies)
-    }));
-
-    /* 🧠 GEMINI PROMPT */
     const prompt = `
-You are CampusConnect AI.
+You are a helpful AI assistant for peer matching.
 
-RULES:
-- You ONLY do peer matching.
-- Match users if ANY condition matches:
-  • Their strengths help user's weaknesses
-  • Similar OR related hobbies
-  • Overlapping interests or skills
-- Treat similar words as the same:
-  Maths = Mathematics
-  Coding = Programming
-  Java = Backend
+Current user:
+${JSON.stringify(currentUser, null, 2)}
 
-DO NOT:
-- Solve problems
-- Teach concepts
-- Answer anything except peer matching
+Other users:
+${JSON.stringify(otherUsers, null, 2)}
 
-CURRENT USER:
-${JSON.stringify(currentUser)}
+User query:
+"${userQuery || "find suitable peers"}"
 
-OTHER USERS:
-${JSON.stringify(otherUsers)}
+If greeting, reply politely as text.
+If peer matching, reply ONLY as JSON array:
 
-USER QUERY:
-${userQuery || "Find best peer matches"}
-
-Respond ONLY in a valid JSON array.
-NO explanation text.
-NO markdown.
-ONLY JSON.
-
-Format:
 [
-  {
-    "uid": "",
-    "name": "",
-    "reason": ""
-  }
+  { "uid": "", "name": "", "reason": "" }
 ]
 `;
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -109,37 +61,24 @@ Format:
     );
 
     const data = await response.json();
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
-    console.log("🔵 RAW GEMINI RESPONSE:\n", text);
-
-    if (!text) {
-      return res.json([]);
+    // Greeting case
+    if (!text.trim().startsWith("[")) {
+      return res.json({ message: text });
     }
 
-    /* 🔥 SAFELY EXTRACT JSON ARRAY */
-    const jsonMatch = text.match(/\[[\s\S]*\]/);
+    const match = text.match(/\[[\s\S]*\]/);
+    if (!match) return res.json([]);
 
-    if (!jsonMatch) {
-      console.log("⚠️ No JSON array found");
-      return res.json([]);
-    }
+    return res.json(JSON.parse(match[0]));
 
-    try {
-      const parsed = JSON.parse(jsonMatch[0]);
-      return res.json(parsed);
-    } catch (err) {
-      console.log("⚠️ JSON parse failed:", jsonMatch[0]);
-      return res.json([]);
-    }
-
-  } catch (error) {
-    console.error("❌ Gemini error:", error);
-    res.status(500).json({ error: "Peer matching failed" });
+  } catch (err) {
+    console.error("❌ Gemini error:", err);
+    res.status(500).json([]);
   }
 });
 
-/* ========================= */
 app.listen(PORT, () => {
-  console.log(`✅ Backend running at http://localhost:${PORT}`);
+  console.log(`🚀 Backend running on http://localhost:${PORT}`);
 });
