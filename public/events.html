@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>CampusConnect | Events</title>
- <link rel="stylesheet" href="/innovexa/public/css/Events.css" />
+  <link rel="stylesheet" href="/public/css/Events.css" />
 </head>
 <body>
 
@@ -15,7 +15,6 @@
     </div>
 
     <div class="nav-center">Events</div>
-
     <button class="history-btn">History</button>
   </header>
 
@@ -25,62 +24,55 @@
     <!-- ONGOING EVENTS -->
     <section class="event-section">
       <h2>🔥 Ongoing Events</h2>
-
       <div class="event-grid">
-
         <div class="event-card">
           <span class="tag recommended">Recommended</span>
           <span class="tag category tech">Technical</span>
-
           <h3>AI Hackathon 2025</h3>
           <p class="date">📅 10 – 12 Feb 2025</p>
           <p class="college">🏫 ABC Engineering College</p>
-          <p class="coordinator">👤 Coordinated by Tech Club</p>
+          <p class="coordinator">👤 Tech Club</p>
           <p class="description">
-            48-hour hackathon focused on AI, ML, and real-world problem solving.
+            48-hour hackathon focused on AI and ML.
           </p>
         </div>
-
       </div>
     </section>
 
     <!-- UPCOMING EVENTS -->
     <section class="event-section">
       <h2>📅 Upcoming Events</h2>
-
-      <div class="event-grid">
-
-        <div class="event-card">
-          <span class="tag category cultural">Cultural</span>
-
-          <h3>Annual Dance Fest</h3>
-          <p class="date">📅 5 March 2025</p>
-          <p class="college">🏫 XYZ University</p>
-          <p class="coordinator">👤 Cultural Committee</p>
-          <p class="description">
-            A vibrant cultural event featuring solo, group and folk dance.
-          </p>
-        </div>
-
-        <div class="event-card">
-          <span class="tag category literary">Literary</span>
-
-          <h3>Quiz Quest</h3>
-          <p class="date">📅 18 March 2025</p>
-          <p class="college">🏫 DEF College</p>
-          <p class="coordinator">👤 Literary Club</p>
-          <p class="description">
-            Inter-college quiz competition covering tech, history & pop culture.
-          </p>
-        </div>
-
-      </div>
+      <div class="event-grid" id="upcomingEvents"></div>
     </section>
 
   </main>
 
   <!-- ADD EVENT BUTTON -->
-  <button class="add-event-btn">＋</button>
+  <button class="add-event-btn" id="openEventForm">＋</button>
 
+  <!-- ADD EVENT MODAL -->
+  <div class="modal hidden" id="eventModal">
+    <div class="modal-box">
+      <h3>Add Upcoming Event</h3>
+
+      <input id="eventName" placeholder="Event Name" />
+      <input id="eventDate" placeholder="Event Date (e.g. 20 March 2025)" />
+      <input id="eventCollege" placeholder="College Name" />
+      <input id="eventCoordinator" placeholder="Coordinator / Club" />
+      <select id="eventCategory">
+        <option value="tech">Technical</option>
+        <option value="cultural">Cultural</option>
+        <option value="literary">Literary</option>
+      </select>
+      <textarea id="eventDesc" placeholder="Event Description"></textarea>
+
+      <div class="modal-actions">
+        <button id="saveEvent">Save</button>
+        <button id="closeEventForm">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/public/js/events.js"></script>
 </body>
 </html>
