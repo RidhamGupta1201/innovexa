@@ -19,13 +19,6 @@ A smart and innovative Complaint algorithm is also instilled in the project whic
 
 ---
 
-## 🎥 5‑Minute Demonstration & Explanation Video
-
-🔗 *Video Link:*  
-**(Add your Google Drive / YouTube / unlisted demo video link here)**
-
----
-
 ## 🚀 Project Overview
 
 CampusConnect is a smart campus collaboration platform designed to help students:
