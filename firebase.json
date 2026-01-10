@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "campusconnect-18208",
     "public": "public",
     "ignore": [
       "firebase.json",
